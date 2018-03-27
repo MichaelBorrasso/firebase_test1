@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>irebase_test2</title>
+   <!-- jQuery -->    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <!--jQuery UI -->
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+   <!-- Firebase -->
+   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+</head>
+
+<body>
+       <form id="login" method="post">                  
+           <div class="form-group" id="login-with-credentials">
+               <fieldset>
+                   <label class="control-label" for="login-email">email:</label>
+                   <input class="form-control" id="login-email" type="email" placeholder="name@email.com" required>
+                   <label class="control-label" for="login-password">password:</label>
+                   <input class="form-control" id="login-password" type="password"
+                   placeholder="••••••" required>
+                   <button type="submit" class="btn btn-primary pill" id="btn-login-with-credentials">login with credentials</button>
+               </fieldset>
+           </div>
+       </form>
+   <script>
+       var config = {
+           apiKey: "AIzaSyDwzle5vCr6byqAvvb79GCf55QYeakdGC8",
+           authDomain: "moodify-6ca83.firebaseapp.com",
+           databaseURL: "https://moodify-6ca83.firebaseio.com",
+           projectId: "moodify-6ca83",
+           storageBucket: "moodify-6ca83.appspot.com",
+           messagingSenderId: "1099465054704"
+       };
+       // storageBucket just in case  moodify-6ca83.appspot.com
+
+       firebase.initializeApp(config);
+       var database = firebase.database();
+       var auth = firebase.auth();
+
+       // watch for sign in of existing credentialed user (for return to their profile)
+       $(document).on('submit', '#login', function (event) {
+           event.preventDefault();
+           //get credentials from user input.
+           var email = $("#login-email").val().trim();
+           var password = $("#login-password").val();
+           firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+
+            // .signInWithEmailAndPassword
+              
+            //Handle errors here.
+               var errorCode = error.code;
+               var errorMessage = error.message;
+               console.log(errorCode);
+               console.log(errorMessage);
+               app.register = function () {
+                signInWithEmailAndPassword
+               }
+               firebase.database().ref().push({
+                   email: email,
+                   password: password,
+               })
+               firebase.auth().ref().push({
+                   email: email,
+                   password: password,
+               })
+           });
+       });
+   </script>
+</body>
+
+</html>
